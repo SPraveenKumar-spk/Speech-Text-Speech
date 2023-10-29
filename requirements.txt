@@ -2,3 +2,4 @@ flask
 gTTS
 pygame
 gunicorn
+SpeechRecognition
