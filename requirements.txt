@@ -3,4 +3,3 @@ gTTS
 pygame
 gunicorn
 SpeechRecognition
-PyAudio
