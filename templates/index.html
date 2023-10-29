@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color:aquamarine ;
+        }
+        h1{
+            text-align: center;
+            margin-top: 8px;
+        }
+        .item{
+            border: 3px solid black;
+            height: 30vh;
+            width: 30rem; 
+        }
+        .box{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        h2{
+            text-align: center;
+            padding: 5px;
+        }
+        .item1{
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .item2{
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .form{
+            margin-top: 5px;
+        }
+        h4{
+            margin-top: 5px;
+        }
+        .lang{
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+        .lang button{
+            padding: 5px;
+            margin-left: 10px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .lang button:hover{
+            color: red;
+        }
+        .result{
+            font-size: 15px;
+            margin-top: 5px;
+        }
+        .form input{
+            margin-top: 5px;
+            margin-left: 15px;
+            border-radius:5px;
+            padding: 5px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .form input:hover{
+            color: red;
+        }
+        .input-text {
+            margin-top: 10px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Speech-Text-Speech</h1>
+    </header>
+    <main>
+        <div class="box">
+            <div>
+                <h2>Speech-to-Text</h2>
+                <div class="speech">
+                    <div class="item1 item">
+                        <h3>To convert Speech to Text</h3>
+                        <p>Choose the appropriate language</p>
+                        <h4>Languages : </h4>
+                        <div class="lang">
+                            <form action="/speech_to_text" method="post">
+                                <select name="language">
+                                    <option value="en-US">English (en-US)</option>
+                                    <option value="hi-IN">Hindi (hi-IN)</option>
+                                    <option value="bn-IN">Bengali (bn-IN)</option>
+                                    <option value="ta-IN">Tamil (ta-IN)</option>
+                                    <option value="te-IN">Telugu (te-IN)</option>
+                                </select>
+                                <button type="submit">Submit</button>
+                            </form>
+                    
+                        </div>
+                        {% if transcription %}
+                        <div class="result">
+                            <h4>Transcription:</h4>
+                            <p>{{ transcription }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h2>Text-to-Speech</h2>
+                    <div class="text">
+                        <div class="item2 item">
+                            <form action="/text-to-speech" method="post">
+                                <h3>To convert Text to Speech</h3>
+                                <p>Enter the required text</p>
+                                <div class="input-text">
+                                    <label for="text">Enter text:</label><br>
+                                    <textarea type="text" id="text" name="text" cols="30" rows="5" required></textarea>
+                                    
+                                </div>
+                                <div class="form">
+                                    <label for="language">Select language:</label>
+                                    <select id="language" name="language">
+                                        <option value="en">English (en)</option>
+                                        <option value="hi">Hindi (hi)</option>
+                                        <option value="bn">Bengali (bn)</option>
+                                        <option value="ta">Tamil (ta)</option>
+                                        <option value="te">Telugu (te)</option>
+                                    </select>
+                                    <input type="submit" value="Convert to Speech">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+</body>
+</html>
