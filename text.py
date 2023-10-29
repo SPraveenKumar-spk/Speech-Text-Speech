@@ -1,0 +1,52 @@
+from gtts import gTTS
+import pygame
+import io
+
+def select_language():
+    print("Select the language for text-to-speech conversion:")
+    print("1. English (en)")
+    print("2. Hindi (hi)")
+    print("3. Bengali (bn)")
+    print("4. Tamil (ta)")
+    print("5. Telugu (te)")
+
+    language_choice = input("Enter the number of your choice: ")
+
+    if language_choice == '1':
+        return 'en'
+    elif language_choice == '2':
+        return 'hi'
+    elif language_choice == '3':
+        return 'bn'
+    elif language_choice == '4':
+        return 'ta'
+    elif language_choice == '5':
+        return 'te'
+    else:
+        print("Invalid choice. Using default language (en).")
+        return 'en'
+
+def text_to_speech(text, language):
+    tts = gTTS(text, lang=language)
+    return tts
+
+def play_audio_directly(tts):
+    audio_data = io.BytesIO()
+    tts.write_to_fp(audio_data)
+    audio_data.seek(0)
+
+    pygame.mixer.init()
+    pygame.mixer.music.load(audio_data)
+    pygame.mixer.music.play()
+
+    clock = pygame.time.Clock()
+    while pygame.mixer.music.get_busy():
+        clock.tick(30)  
+
+if __name__ == '__main__':
+    selected_language = select_language()
+    print(f'Selected language: {selected_language}')
+
+    text = input("Enter the text you want to convert to speech: ")
+    tts = text_to_speech(text, selected_language)
+    play_audio_directly(tts)
